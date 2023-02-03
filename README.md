@@ -1,5 +1,9 @@
 # finewall-mailer
 
+A dockerized [Postfix](http://www.postfix.org/) mail transfer agent.
+
+## Setup
+
 Requires the following environment variables:
 
 ```
@@ -10,3 +14,5 @@ SMTP_USERNAME=...
 SMTP_PASSWORD=...
 SERVER_HOSTNAME=mailer.localhost
 ```
+
+Additionally, for enabling debugging logs, `DEBUG=yes` may be set.
