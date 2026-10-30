@@ -1,11 +1,12 @@
 #Dockerfile for a Postfix email relay service
-FROM debian:buster
+FROM debian:bookworm-20261027-slim
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=Europe/Berlin
 
 RUN apt-get update && \
-    apt-get install -y libsasl2-modules perl supervisor postfix rsyslog
+    apt-get install -y libsasl2-modules perl supervisor postfix rsyslog && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # RUN yum install -y epel-release && yum update -y && \
@@ -19,6 +20,7 @@ RUN apt-get update && \
 COPY etc/ /etc/
 COPY run.sh /
 RUN chmod +x /run.sh
+RUN postconf -e 'inet_protocols = ipv4'
 RUN newaliases
 
 EXPOSE 25
